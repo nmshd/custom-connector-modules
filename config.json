@@ -1,0 +1,18 @@
+{
+    "database": {
+        "connectionString": "mongodb://mongodb:27017"
+    },
+    "infrastructure": {
+        "httpServer": {
+            "apiKey": "This_is_a_test_APIKEY_with_30_chars+"
+        }
+    },
+    "modules": {
+        "coreHttpApi": { "enabled": false },
+        "customModule": {
+            "enabled": true,
+            "location": "custom-module",
+            "displayName": "A VERY custom module"
+        }
+    }
+}
