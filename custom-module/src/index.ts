@@ -1,7 +1,7 @@
 import { ConnectorRuntimeModule, ConnectorRuntimeModuleConfiguration, Envelope, HttpError } from "@nmshd/connector-types";
 import { RelationshipChangedEvent } from "@nmshd/runtime";
 
-export default class TheStuffTheDemoTeamDidModule extends ConnectorRuntimeModule<ConnectorRuntimeModuleConfiguration> {
+export default class CustomModule extends ConnectorRuntimeModule<ConnectorRuntimeModuleConfiguration> {
     public init(): void {
         this.logger.info("Hello from the custom module!");
 
