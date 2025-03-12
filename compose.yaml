@@ -3,7 +3,7 @@ services:
     image: ghcr.io/nmshd/connector:6.16.3
     container_name: connector-with-custom-module
     ports:
-      - "8080:80"
+      - "8099:80"
     environment:
       - CUSTOM_CONFIG_LOCATION=/config.json
       - transportLibrary__baseUrl

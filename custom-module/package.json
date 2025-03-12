@@ -2,6 +2,9 @@
     "name": "custom-module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "dependencies": {
+        "dog-names": "^3.0.0"
+    },
     "devDependencies": {
         "@nmshd/connector-types": "^6.16.3",
         "@types/express": "^5.0.0",
