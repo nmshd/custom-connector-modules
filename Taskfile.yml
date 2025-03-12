@@ -1,0 +1,59 @@
+version: "3"
+
+tasks:
+  prepare:
+    desc: Prepare the environment
+    cmds:
+      - npm i
+
+  build:
+    deps: [prepare]
+    dir: custom-module
+    desc: Build the custom module
+    cmds:
+      - npm i
+      - tsc
+
+  watch:
+    deps: [prepare]
+    dir: custom-module
+    desc: Watch the custom module and build on changes
+    cmds:
+      - npm i
+      - tsc -w
+
+  up:
+    deps: [build]
+    desc: Start the connector
+    cmds:
+      - docker compose up -d
+
+  restart:
+    desc: Restart the connector
+    cmds:
+      - docker compose restart connector
+
+  logs:
+    desc: Show connector logs
+    cmds:
+      - docker compose logs -f connector
+
+  2fa-errors:
+    desc: Call the 2fa endpoint with errors
+    cmds:
+      - http -b GET localhost:8099/university-X/2fa
+      - "http -b POST localhost:8099/university-X/2fa 'X-API-KEY: This_is_a_test_APIKEY_with_30_chars+'"
+      - 'echo -n ''{"peer": "aPeer"}'' | http -b POST localhost:8099/university-X/2fa ''X-API-KEY: This_is_a_test_APIKEY_with_30_chars+'''
+
+  2fa:
+    desc: Call the 2fa endpoint
+    cmds:
+      - 'echo -n ''{"peer": "{{.PEER}}", "twoFactorText": "Are you trying to login to your university account?"}'' | http -b POST localhost:8099/university-X/2fa ''X-API-KEY: This_is_a_test_APIKEY_with_30_chars+'''
+    vars:
+      PEER:
+        sh: "http -b GET 'localhost:8099/api/v2/Relationships?status=Active' 'X-API-KEY: This_is_a_test_APIKEY_with_30_chars+' | jq -r '.result[0].peer'"
+
+  dog:
+    desc: Call the dog endpoint
+    cmds:
+      - http -b GET localhost:8099/dog
