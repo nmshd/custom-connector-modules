@@ -2,6 +2,7 @@ import { ConnectorRuntimeModule, ConnectorRuntimeModuleConfiguration, Envelope, 
 import { Mail, ResponseResult } from "@nmshd/content";
 import { LocalRequestStatus, OutgoingRequestStatusChangedEvent } from "@nmshd/runtime";
 import { randomDogName } from "dog-names";
+import { TwoFactorAuthenticationAcceptedEvent } from "./TwoFactorAuthenticationAcceptedEvent";
 
 export default class CustomModule extends ConnectorRuntimeModule<ConnectorRuntimeModuleConfiguration> {
     public init(): void {
@@ -62,6 +63,8 @@ export default class CustomModule extends ConnectorRuntimeModule<ConnectorRuntim
                     recipients: [request.peer],
                     content: Mail.from({ to: [request.peer], subject: "Login Accepted", body: "We logged you in! Please check your browser to continue." }).toJSON()
                 });
+
+                this.runtime.eventBus.publish(new TwoFactorAuthenticationAcceptedEvent({ peer: request.peer }));
             } else {
                 await services.transportServices.messages.sendMessage({
                     recipients: [request.peer],

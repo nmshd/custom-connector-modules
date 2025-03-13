@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@js-soft/ts-utils": "^2.3.3",
         "@nmshd/connector-types": "^6.16.3",
         "@types/express": "^5.0.0",
         "@types/luxon": "^3.4.2"
