@@ -1,6 +1,6 @@
 # Reference implementation for custom connector modules
 
-TODO: explain what this repo does
+This repository contains a reference implementation for creating custom modules for the enmeshed connector. It demonstrates how to extend the functionality of the connector by adding custom endpoints and handling/publishing events.
 
 ## Documentation
 
