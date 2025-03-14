@@ -9,14 +9,14 @@
 
 ## Taskfile tasks
 
-The `Taskfile.yml` in this repository defines various tasks to help with the development and management of the custom connector module. Here are the tasks defined:
+The `Taskfile.yml` in this repository defines various tasks to help with the development and management of the custom Connector module. Here are the tasks defined:
 
 -   **prepare**: Prepares the environment by installing necessary npm packages.
 -   **build**: Builds the custom module after preparing the environment.
 -   **watch**: Watches the custom module and rebuilds it on changes.
--   **up**: Starts the connector using Docker Compose.
--   **restart**: Restarts the connector.
--   **logs**: Shows the logs of the connector.
+-   **up**: Starts the Connector using Docker Compose.
+-   **restart**: Restarts the Connector.
+-   **logs**: Shows the logs of the Connector.
 -   **2fa-errors**: Calls the 2FA endpoint with error scenarios for testing.
 -   **2fa**: Calls the 2FA endpoint with a valid request.
 -   **dog**: Calls the dog endpoint to get a random dog name.
@@ -45,7 +45,7 @@ To get started with development, follow these steps:
     task prepare
     ```
 
-4.  Start the connector:
+4.  Start the Connector:
 
     ```bash
     task up
@@ -57,7 +57,7 @@ To get started with development, follow these steps:
     task watch
     ```
 
-6.  Make changes to the custom module and see the changes reflected in the connector. Make sure to restart the connector when finished:
+6.  Make changes to the custom module and see the changes reflected in the Connector. Make sure to restart the Connector when finished:
 
     ```bash
     task restart
@@ -67,5 +67,5 @@ To get started with development, follow these steps:
 
 The repository is structured as follows:
 
--   `./`: Contains the main configuration files like `Taskfile.yml`, `compose.yml`, configuration for formatter etc. and the dependencies `tsc` needs to build the custom module. See [package.json](./package.json) to see which dependencies are needed to build the module. It's important that those dependencies are not installed in the custom module directory to avoid conflicts when mounting the custom module inside the connector container.
--   `./custom-module`: Contains the custom modules code and its dependencies.
+-   `./`: Contains the main configuration files like `Taskfile.yml`, `compose.yml`, configuration for formatter etc. and the dependencies `tsc` needs to build the custom module. See [package.json](./package.json) to see which dependencies are needed to build the module. It's important that those dependencies are not installed in the custom module directory to avoid conflicts when mounting the custom module inside the Connector container.
+-   `./custom-module`: Contains the custom module's code and its dependencies.
