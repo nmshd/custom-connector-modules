@@ -3,6 +3,6 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "dependencies": {
-        "dog-names": "^3.0.0"
+        "dog-names": "3.0.1"
     }
 }

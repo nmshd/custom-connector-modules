@@ -1,5 +1,5 @@
 import { ConnectorRuntimeModule, ConnectorRuntimeModuleConfiguration, Envelope, HttpError } from "@nmshd/connector-types";
-import { Mail, ResponseResult } from "@nmshd/content";
+import { Mail, MailBodyFormat, ResponseResult } from "@nmshd/content";
 import { LocalRequestStatus, OutgoingRequestStatusChangedEvent } from "@nmshd/runtime";
 import { randomDogName } from "dog-names";
 import { TwoFactorAuthenticationAcceptedEvent } from "./TwoFactorAuthenticationAcceptedEvent";
@@ -61,7 +61,12 @@ export default class CustomModule extends ConnectorRuntimeModule<ConnectorRuntim
             if (request.response!.content.result === ResponseResult.Accepted) {
                 await services.transportServices.messages.sendMessage({
                     recipients: [request.peer],
-                    content: Mail.from({ to: [request.peer], subject: "Login Accepted", body: "We logged you in! Please check your browser to continue." }).toJSON()
+                    content: Mail.from({
+                        to: [request.peer],
+                        subject: "Login Accepted",
+                        body: "We logged you in! Please check your browser to continue.",
+                        bodyFormat: MailBodyFormat.PlainText
+                    }).toJSON()
                 });
 
                 this.runtime.eventBus.publish(new TwoFactorAuthenticationAcceptedEvent({ peer: request.peer }));
@@ -71,7 +76,8 @@ export default class CustomModule extends ConnectorRuntimeModule<ConnectorRuntim
                     content: Mail.from({
                         to: [request.peer],
                         subject: "Login Denied",
-                        body: "We denied login, if you think someone else tried to access your account click on https://example.com/change-password to change your password."
+                        body: "We denied login, if you think someone else tried to access your account click on https://example.com/change-password to change your password.",
+                        bodyFormat: MailBodyFormat.PlainText
                     }).toJSON()
                 });
             }
